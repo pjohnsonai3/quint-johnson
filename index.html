@@ -276,13 +276,253 @@
     </footer>
 
     <script>
-        // Interactive Scatter Plot with Custom Hover Tooltips
-        const ctx = document.getElementById('scatterChart').getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'Georgia Kickers',
-                    data: [
-                        {x: 94.2, y: 90.0, pat: 97.5, comp: 95.35, name: 'Quint Johnson', school: 'Newnan High (GA)'},
-                        {x: 88.1, y: 83.3, pat: 96.6, comp: 89.30, name: 'Leo Attard', school: 'North Gwinnett (
+        // Ensure DOM is loaded before initializing chart and functions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Interactive Scatter Plot with Custom Hover Tooltips
+            const ctx = document.getElementById('scatterChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Georgia Kickers',
+                        data: [
+                            {x: 94.2, y: 90.0, pat: 97.5, comp: 95.35, name: 'Quint Johnson', school: 'Newnan High (GA)'},
+                            {x: 88.1, y: 83.3, pat: 96.6, comp: 89.30, name: 'Leo Attard', school: 'North Gwinnett (GA)'},
+                            {x: 89.6, y: 77.8, pat: 94.7, comp: 87.40, name: 'Balint Vorosmarty', school: 'Northview (GA)'},
+                            {x: 92.3, y: 75.0, pat: 95.0, comp: 87.30, name: 'Jake Collett', school: 'Milton (GA)'},
+                            {x: 88.9, y: 71.4, pat: 94.1, comp: 84.80, name: 'Carter Genchi', school: 'Lambert (GA)'}
+                        ],
+                        backgroundColor: 'rgba(220, 53, 69, 0.8)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        pointRadius: 6,
+                        pointHoverRadius: 12,
+                        pointHoverBorderWidth: 4,
+                        pointBorderWidth: 2
+                    }, {
+                        label: 'Other States',
+                        data: [
+                            {x: 94.5, y: 80.0, pat: 97.8, comp: 90.70, name: 'Harran Zureikat', school: 'Fox Chapel (PA)'},
+                            {x: 92.0, y: 81.8, pat: 94.6, comp: 89.60, name: 'Stephen Gonzales', school: 'Cardinal Gibbons (NC)'},
+                            {x: 92.6, y: 77.8, pat: 95.5, comp: 88.60, name: 'David Green', school: 'Rolesville (NC)'},
+                            {x: 91.7, y: 77.8, pat: 95.2, comp: 88.20, name: 'Gavin Higgins', school: 'John Curtis (LA)'},
+                            {x: 88.9, y: 80.0, pat: 94.3, comp: 87.70, name: 'Thomas Bauchiero', school: 'Brentwood Academy (TN)'},
+                            {x: 89.1, y: 75.0, pat: 96.9, comp: 87.00, name: 'Hayden Chambers', school: 'Spain Park (AL)'},
+                            {x: 90.0, y: 77.8, pat: 94.4, comp: 87.10, name: 'Lane Rigby', school: 'Leander (TX)'},
+                            {x: 78.0, y: 84.6, pat: 98.5, comp: 87.10, name: 'Peter Fiorello', school: 'Lampeter-Strasburg (PA)'},
+                            {x: 87.5, y: 71.4, pat: 96.7, comp: 85.20, name: 'Nolan Bartley', school: 'Frisco Memorial (TX)'},
+                            {x: 86.4, y: 75.0, pat: 93.8, comp: 85.10, name: 'Bode Shoaps', school: 'Olentangy Liberty (OH)'},
+                            {x: 86.7, y: 75.0, pat: 93.5, comp: 85.10, name: 'Gavin Polk', school: 'Brother Martin (LA)'},
+                            {x: 85.7, y: 71.4, pat: 96.4, comp: 84.50, name: 'Will Love', school: 'Dorman (SC)'},
+                            {x: 80.0, y: 75.0, pat: 97.4, comp: 84.20, name: 'Jacobo Echeverria Lozano', school: 'Upper St. Clair (PA)'},
+                            {x: 85.0, y: 71.4, pat: 96.3, comp: 84.20, name: 'Trace Rudd', school: 'Blue Valley NW (KS)'},
+                            {x: 87.5, y: 66.7, pat: 96.2, comp: 83.50, name: 'Adam McCann-Gibbs', school: '(FL/Ireland)'}
+                        ],
+                        backgroundColor: 'rgba(52, 58, 64, 0.8)',
+                        borderColor: 'rgba(52, 58, 64, 1)',
+                        pointRadius: 6,
+                        pointHoverRadius: 12,
+                        pointHoverBorderWidth: 4,
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animations: {
+                        tension: {
+                            duration: 2500,
+                            easing: 'easeInOutQuint',
+                            from: 1
+                        },
+                        x: {
+                            from: 0,
+                            type: 'number',
+                            duration: 2500,
+                            easing: 'easeInOutQuint'
+                        },
+                        y: {
+                            from: 0,
+                            type: 'number',
+                            duration: 2500,
+                            easing: 'easeInOutQuint'
+                        },
+                        radius: {
+                            from: 0,
+                            type: 'number',
+                            duration: 2500,
+                            easing: 'easeInOutQuint'
+                        },
+                        delay: (context) => {
+                            return context.dataIndex * 100;
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'point'
+                    },
+                    hover: {
+                        animationDuration: 200,
+                        mode: 'nearest',
+                        intersect: false
+                    },
+                    plugins: {
+                        tooltip: {
+                            intersect: false,
+                            mode: 'point',
+                            backgroundColor: 'rgba(52, 58, 64, 0.9)',
+                            titleColor: '#dc3545',
+                            bodyColor: '#f8f9fa',
+                            borderColor: '#dc3545',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                title: function(context) {
+                                    const point = context[0].raw;
+                                    return point.name;
+                                },
+                                label: function(context) {
+                                    const point = context.raw;
+                                    return [
+                                        `School: ${point.school}`,
+                                        `FG%: ${point.y}%`,
+                                        `PAT%: ${point.pat}%`,
+                                        `TB%: ${point.x}%`,
+                                        `Composite: ${point.comp}%`
+                                    ];
+                                }
+                            },
+                            animation: {
+                                duration: 0
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            onClick: (e, legendItem, legend) => {
+                                const ci = legend.chart;
+                                const meta = ci.getDatasetMeta(legendItem.datasetIndex);
+                                meta.hidden = meta.hidden === null ? !ci.data.datasets[legendItem.datasetIndex].hidden : null;
+                                ci.update('active');
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Touchback % (TB%)' },
+                            min: 70,
+                            max: 100,
+                            grid: { color: 'rgba(0,0,0,0.1)' },
+                            animation: {
+                                duration: 2500,
+                                easing: 'easeInOutQuint'
+                            }
+                        },
+                        y: {
+                            title: { display: true, text: 'Field Goal % (FG%)' },
+                            min: 60,
+                            max: 100,
+                            grid: { color: 'rgba(0,0,0,0.1)' },
+                            animation: {
+                                duration: 2500,
+                                easing: 'easeInOutQuint'
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const point = elements[0];
+                            const datasetIndex = point.datasetIndex;
+                            const dataIndex = point.index;
+                            const dataset = chart.data.datasets[datasetIndex];
+                            const pointData = dataset.data[dataIndex];
+                            const originalRadius = point.element.options.radius;
+                            const originalBorderWidth = point.element.options.borderWidth;
+                            point.element.options.radius = 14;
+                            point.element.options.borderWidth = 5;
+                            chart.update('none');
+                            setTimeout(() => {
+                                point.element.options.radius = originalRadius;
+                                point.element.options.borderWidth = originalBorderWidth;
+                                chart.update('none');
+                            }, 500);
+                            alert(`${pointData.name}\nSchool: ${pointData.school}\nFG%: ${pointData.y}%\nPAT%: ${pointData.pat}%\nTB%: ${pointData.x}%\nComposite: ${pointData.comp}%`);
+                        }
+                    }
+                }
+            });
+
+            // Double-click to reset
+            ctx.canvas.addEventListener('dblclick', () => {
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.hidden = false;
+                });
+                chart.update('active');
+            });
+
+            // Enhanced table sorting with visual indicators
+            window.sortTable = function(n) {
+                const table = document.getElementById("kickers-table");
+                let switching = true;
+                let dir = "asc";
+                let switchcount = 0;
+                const headers = table.getElementsByTagName("th");
+                
+                // Reset all headers
+                for (let i = 0; i < headers.length; i++) {
+                    headers[i].classList.remove('sorted-asc', 'sorted-desc');
+                }
+                
+                // Determine initial direction based on current state
+                const currentHeader = headers[n];
+                if (currentHeader.classList.contains('sorted-asc')) {
+                    dir = "desc";
+                    currentHeader.classList.remove('sorted-asc');
+                    currentHeader.classList.add('sorted-desc');
+                } else if (currentHeader.classList.contains('sorted-desc')) {
+                    dir = "asc";
+                    currentHeader.classList.remove('sorted-desc');
+                    currentHeader.classList.add('sorted-asc');
+                } else {
+                    // First sort: asc
+                    dir = "asc";
+                    currentHeader.classList.add('sorted-asc');
+                }
+                
+                while (switching) {
+                    switching = false;
+                    const rows = table.rows;
+                    for (let i = 1; i < (rows.length - 1); i++) {
+                        let shouldSwitch = false;
+                        const x = rows[i].getElementsByTagName("TD")[n];
+                        const y = rows[i + 1].getElementsByTagName("TD")[n];
+                        const xVal = isNaN(x.innerHTML) ? x.innerHTML.toLowerCase() : parseFloat(x.innerHTML);
+                        const yVal = isNaN(y.innerHTML) ? y.innerHTML.toLowerCase() : parseFloat(y.innerHTML);
+                        if (dir == "asc") {
+                            if (xVal > yVal) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (xVal < yVal) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldSwitch) {
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                        switchcount++;
+                    } else {
+                        if (switchcount == 0 && !currentHeader.classList.contains('sorted-asc') && !currentHeader.classList.contains('sorted-desc')) {
+                            // If no previous sort, set to asc on first click
+                            currentHeader.classList.add('sorted-asc');
+                        }
+                    }
+                }
+            };
+        });
+    </script>
+</body>
+</html>
