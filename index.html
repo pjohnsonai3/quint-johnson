@@ -121,4 +121,88 @@
             background: #000A1A;
         }
         th i.sort-icon {
-            margin
+            margin-left: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        th:hover i.sort-icon {
+            opacity: 1;
+        }
+        th.sorted-asc i.sort-icon::before {
+            content: "\f062"; /* fa-sort-up */
+        }
+        th.sorted-desc i.sort-icon::before {
+            content: "\f061"; /* fa-sort-down */
+        }
+        th:not(.sorted) i.sort-icon::before {
+            content: "\f0dc"; /* fa-sort */
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tr:hover {
+            background: #e9ecef;
+        }
+        .ol-ranked {
+            list-style: none;
+            counter-reset: rank-counter;
+            padding: 0;
+        }
+        .ol-ranked li {
+            counter-increment: rank-counter;
+            margin: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        .ol-ranked li::before {
+            content: counter(rank-counter) ".";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #343a40;
+            color: white;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        #scatterChart {
+            max-height: 400px;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-football-ball"></i> Class of 2026 Kickers Dashboard</h1>
+        <h2>Quint Johnson (Newnan High, GA) – #1 Nationally</h2>
+        <img src="profile.jpg" alt="Quint Johnson Profile Photo" onerror="this.style.display='none';">
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h3><i class="fas fa-chart-scatter"></i> FG% vs TB% – Interactive Scatter Plot</h3>
+            <p><em>Hover for stats • Click legend to filter • Double-click chart to reset</em></p>
+            <canvas id="scatterChart"></canvas>
+        </section>
+
+        <section class="section">
+            <h3><i class="fas fa-trophy"></i> Quint Johnson – #1 Kicker in America (2026)</h3>
+            <p>Newnan High School (GA)</p>
+            <ul class="stats-list">
+                <li><strong>FG%:</strong> <span>90.0
