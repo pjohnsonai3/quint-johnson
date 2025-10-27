@@ -1,0 +1,189 @@
+``html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2026 Kickers Dashboard | Quint Johnson #1</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f6f9; color: #2c3e50; }
+    .container { max-width: 1200px; margin: auto; padding: 20px; }
+    header { text-align: center; padding: 30px; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; border-radius: 12px; margin-bottom: 20px; }
+    h1 { margin: 0; font-size: 2.2em; }
+    h2 { color: #1e3c72; border-bottom: 2px solid #3498db; padding-bottom: 8px; }
+    .section { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    #scatter-plot { height: 500px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.95em; }
+    th, td { padding: 12px; text-align: center; border-bottom: 1px solid #ddd; }
+    th { background: #3498db; color: white; cursor: pointer; }
+    tr:hover { background: #f1f8ff; }
+    .highlight { background: #fffacd !important; font-weight: bold; }
+    .quint { background: #d4edda; font-weight: bold; }
+    .stat-card { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 1em; }
+    .card-title { grid-column: span 2; font-weight: bold; font-size: 1.3em; color: #1e3c72; }
+    .badge { background: #28a745; color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.8em; }
+    footer { text-align: center; padding: 20px; color: #7f8c8d; font-size: 0.9em; }
+    @media (max-width: 768px) { .stat-card { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Class of 2026 Kickers Dashboard</h1>
+      <p><strong>Quint Johnson (Newnan High, GA) – #1 Nationally</strong></p>
+    </header>
+
+    <!-- Scatter Plot -->
+    <div class="section">
+      <h2>FG% vs TB% – Interactive Scatter Plot</h2>
+      <div id="scatter-plot"></div>
+      <p><em>Hover for stats • Click legend to filter • Double-click to reset</em></p>
+    </div>
+
+    <!-- Quint Stat Card -->
+    <div class="section">
+      <h2>Quint Johnson – #1 Kicker in America (2026)</h2>
+      <div class="stat-card">
+        <div class="card-title">Newnan High School (GA)</div>
+        <div><strong>FG%</strong>: 90.0% (9/10) <span class="badge">Elite</span></div>
+        <div><strong>PAT%</strong>: 97.5% (39/40)</div>
+        <div><strong>TB%</strong>: 94.2% (49/52)</div>
+        <div><strong>KO Avg</strong>: 69.54 yds</div>
+        <div><strong>Long FG</strong>: 45 yds</div>
+        <div><strong>Points</strong>: 66</div>
+        <div><strong>Composite</strong>: <strong>95.35%</strong> → <span class="badge">#1 in Nation</span></div>
+        <div><strong>MaxPreps</strong>: <a href="https://www.maxpreps.com/ga/newnan/newnan-cougars/football/players/quint-johnson" target="_blank">View Profile</a></div>
+      </div>
+    </div>
+
+    <!-- Full Table -->
+    <div class="section">
+      <h2>Top 20 Kickers – Full Stats (Sortable)</h2>
+      <table id="kickers-table">
+        <thead>
+          <tr>
+            <th>Rank</th><th>Name</th><th>School</th><th>State</th>
+            <th>FG%</th><th>PAT%</th><th>TB%</th><th>Composite</th><th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="quint"><td>1</td><td>Quint Johnson</td><td>Newnan High</td><td>GA</td><td>90.0</td><td>97.5</td><td>94.2</td><td>95.35</td><td>#1 – 69.5 yd KO, D1 sleeper</td></tr>
+          <tr><td>2</td><td>Harran Zureikat</td><td>Fox Chapel</td><td>PA</td><td>80.0</td><td>97.8</td><td>94.5</td><td>90.70</td><td>Georgia commit</td></tr>
+          <tr><td>3</td><td>Stephen Gonzales</td><td>Cardinal Gibbons</td><td>NC</td><td>81.8</td><td>94.6</td><td>92.0</td><td>89.60</td><td>Stetson offer</td></tr>
+          <tr><td>4</td><td>Leo Attard</td><td>North Gwinnett</td><td>GA</td><td>83.3</td><td>96.6</td><td>88.1</td><td>89.30</td><td>Army offer</td></tr>
+          <tr><td>5</td><td>David Green</td><td>Rolesville</td><td>NC</td><td>77.8</td><td>95.5</td><td>92.6</td><td>88.60</td><td>UNC commit</td></tr>
+          <tr><td>6</td><td>Gavin Higgins</td><td>John Curtis</td><td>LA</td><td>77.8</td><td>95.2</td><td>91.7</td><td>88.20</td><td>LSU commit</td></tr>
+          <tr><td>7</td><td>Thomas Bauchiero</td><td>Brentwood Academy</td><td>TN</td><td>80.0</td><td>94.3</td><td>88.9</td><td>87.70</td><td>Rice commit</td></tr>
+          <tr><td>8</td><td>Balint Vorosmarty</td><td>Northview</td><td>GA</td><td>77.8</td><td>94.7</td><td>89.6</td><td>87.40</td><td>Ga. St. commit</td></tr>
+          <tr><td>9</td><td>Jake Collett</td><td>Milton</td><td>GA</td><td>75.0</td><td>95.0</td><td>92.3</td><td>87.30</td><td>Texas commit</td></tr>
+          <tr><td>10</td><td>Hayden Chambers</td><td>Spain Park</td><td>AL</td><td>75.0</td><td>96.9</td><td>89.1</td><td>87.00</td><td>Miss. St. commit</td></tr>
+          <tr><td>11</td><td>Lane Rigby</td><td>Leander</td><td>TX</td><td>77.8</td><td>94.4</td><td>90.0</td><td>87.10</td><td>Air Force commit</td></tr>
+          <tr><td>12</td><td>Peter Fiorello</td><td>Lampeter-Strasburg</td><td>PA</td><td>84.6</td><td>98.5</td><td>78.0</td><td>87.10</td><td>High volume</td></tr>
+          <tr><td>13</td><td>Nolan Bartley</td><td>Frisco Memorial</td><td>TX</td><td>71.4</td><td>96.7</td><td>87.5</td><td>85.20</td><td>Multi-offers</td></tr>
+          <tr><td>14</td><td>Bode Shoaps</td><td>Olentangy Liberty</td><td>OH</td><td>75.0</td><td>93.8</td><td>86.4</td><td>85.10</td><td>Combo</td></tr>
+          <tr><td>15</td><td>Gavin Polk</td><td>Brother Martin</td><td>LA</td><td>75.0</td><td>93.5</td><td>86.7</td><td>85.10</td><td>Strong leg</td></tr>
+          <tr><td>16</td><td>Carter Genchi</td><td>Lambert</td><td>GA</td><td>71.4</td><td>94.1</td><td>88.9</td><td>84.80</td><td>CSK champ</td></tr>
+          <tr><td>17</td><td>Will Love</td><td>Dorman</td><td>SC</td><td>71.4</td><td>96.4</td><td>85.7</td><td>84.50</td><td>VT commit</td></tr>
+          <tr><td>18</td><td>Jacobo Echeverria Lozano</td><td>Upper St. Clair</td><td>PA</td><td>75.0</td><td>97.4</td><td>80.0</td><td>84.20</td><td>High PAT</td></tr>
+          <tr><td>19</td><td>Trace Rudd</td><td>Blue Valley NW</td><td>KS</td><td>71.4</td><td>96.3</td><td>85.0</td><td>84.20</td><td>Consistent</td></tr>
+          <tr><td>20</td><td>Adam McCann-Gibbs</td><td>(FL/Ireland)</td><td>FL</td><td>66.7</td><td>96.2</td><td>87.5</td><td>83.50</td><td>Penn St. commit</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Georgia Leaderboard -->
+    <div class="section">
+      <h2>Georgia 2026 Kickers</h2>
+      <ol>
+        <li><strong>Quint Johnson</strong> – Newnan – 95.35%</li>
+        <li>Leo Attard – North Gwinnett – 89.30%</li>
+        <li>Jake Collett – Milton – 87.30%</li>
+        <li>Balint Vorosmarty – Northview – 87.40%</li>
+        <li>Carter Genchi – Lambert – 84.80%</li>
+      </ol>
+      
+    </div>
+
+    <footer>
+      Data: MaxPreps (Oct 27, 2025) | Composite = (FG% + PAT%)/2 + TB% | 
+      <a href="mailto:quintjohnson2026@gmail.com">Contact Quint</a>
+    </footer>
+  </div>
+
+  <script>
+    // Scatter Plot Data
+    const plotData = [
+      {name: "Quint Johnson", fg: 90.0, tb: 94.2, score: 95.35, state: "GA", rank: 1},
+      {name: "Harran Zureikat", fg: 80.0, tb: 94.5, score: 90.70, state: "PA", rank: 2},
+      {name: "Stephen Gonzales", fg: 81.8, tb: 92.0, score: 89.60, state: "NC", rank: 3},
+      {name: "Leo Attard", fg: 83.3, tb: 88.1, score: 89.30, state: "GA", rank: 4},
+      {name: "David Green", fg: 77.8, tb: 92.6, score: 88.60, state: "NC", rank: 5},
+      {name: "Gavin Higgins", fg: 77.8, tb: 91.7, score: 88.20, state: "LA", rank: 6},
+      {name: "Thomas Bauchiero", fg: 80.0, tb: 88.9, score: 87.70, state: "TN", rank: 7},
+      {name: "Balint Vorosmarty", fg: 77.8, tb: 89.6, score: 87.40, state: "GA", rank: 8},
+      {name: "Jake Collett", fg: 75.0, tb: 92.3, score: 87.30, state: "GA", rank: 9},
+      {name: "Hayden Chambers", fg: 75.0, tb: 89.1, score: 87.00, state: "AL", rank: 10},
+      {name: "Lane Rigby", fg: 77.8, tb: 90.0, score: 87.10, state: "TX", rank: 11},
+      {name: "Peter Fiorello", fg: 84.6, tb: 78.0, score: 87.10, state: "PA", rank: 12},
+      {name: "Nolan Bartley", fg: 71.4, tb: 87.5, score: 85.20, state: "TX", rank: 13},
+      {name: "Bode Shoaps", fg: 75.0, tb: 86.4, score: 85.10, state: "OH", rank: 14},
+      {name: "Gavin Polk", fg: 75.0, tb: 86.7, score: 85.10, state: "LA", rank: 15},
+      {name: "Carter Genchi", fg: 71.4, tb: 88.9, score: 84.80, state: "GA", rank: 16},
+      {name: "Will Love", fg: 71.4, tb: 85.7, score: 84.50, state: "SC", rank: 17},
+      {name: "Jacobo Echeverria Lozano", fg: 75.0, tb: 80.0, score: 84.20, state: "PA", rank: 18},
+      {name: "Trace Rudd", fg: 71.4, tb: 85.0, score: 84.20, state: "KS", rank: 19},
+      {name: "Adam McCann-Gibbs", fg: 66.7, tb: 87.5, score: 83.50, state: "FL", rank: 20}
+    ];
+
+    const stateColors = { "GA": "#27ae60", "PA": "#e74c3c", "NC": "#3498db", "TX": "#f39c12", "LA": "#9b59b6", "TN": "#1abc9c", "AL": "#d35400", "FL": "#34495e", "OH": "#7f8c8d", "SC": "#e67e22", "KS": "#95a5a6" };
+
+    const trace = {
+      x: plotData.map(d => d.fg),
+      y: plotData.map(d => d.tb),
+      mode: 'markers+text',
+      text: plotData.map(d => d.name === "Quint Johnson" ? "Q" : d.rank),
+      textposition: 'middle center',
+      textfont: { size: 12, color: 'white', family: 'Arial' },
+      marker: {
+        size: plotData.map(d => d.score * 0.9),
+        color: plotData.map(d => stateColors[d.state]),
+        line: { width: 2, color: '#fff' }
+      },
+      hoverinfo: 'text',
+      hovertext: plotData.map(d => `<b>#${d.rank} ${d.name}</b><br>FG%: ${d.fg}%<br>TB%: ${d.tb}%<br>Score: ${d.score}<br>State: ${d.state}`)
+    };
+
+    const layout = {
+      title: { text: '2026 Kickers: FG% vs Touchback %', font: { size: 18 } },
+      xaxis: { title: 'Field Goal %', range: [65, 95], gridcolor: '#eee' },
+      yaxis: { title: 'Touchback %', range: [75, 100], gridcolor: '#eee' },
+      hovermode: 'closest',
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'white',
+      legend: { title: { text: 'State' } },
+      margin: { l: 60, r: 40, t: 60, b: 60 }
+    };
+
+    Plotly.newPlot('scatter-plot', [trace], layout);
+
+    // Sortable Table
+    new Sortable(document.querySelector('#kickers-table thead'), {
+      animation: 150,
+      onEnd: function () {
+        const rows = Array.from(document.querySelectorAll('#kickers-table tbody tr'));
+        rows.sort((a, b) => {
+          const col = this.sortable.option('sortField');
+          const dir = this.sortable.option('sortDirection');
+          const aVal = a.cells[col].innerText;
+          const bVal = b.cells[col].innerText;
+          return (aVal > bVal ? 1 : -1) * (dir === 'desc' ? -1 : 1);
+        });
+        const tbody = document.querySelector('#kickers-table tbody');
+        rows.forEach(row => tbody.appendChild(row));
+      }
+    });
+  </script>
+</body>
+</html>
