@@ -8,20 +8,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: white;
+            --text-primary: #343a40;
+            --text-secondary: #6c757d;
+            --header-bg: linear-gradient(135deg, #000000, #1a1a1a);
+            --header-text: white;
+            --accent: #00BFFF;
+            --accent-hover: #0099cc;
+            --border-accent: #00BFFF;
+            --table-header: #000000;
+            --table-header-hover: #1a1a1a;
+            --shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        [data-theme="dark"] {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --header-bg: linear-gradient(135deg, #000000, #1a1a1a);
+            --header-text: white;
+            --accent: #00BFFF;
+            --accent-hover: #0099cc;
+            --border-accent: #00BFFF;
+            --table-header: #1a1a1a;
+            --table-header-hover: #000000;
+            --shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #343a40;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         header {
-            background: linear-gradient(135deg, #000000, #1a1a1a);
-            color: white;
+            background: var(--header-bg);
+            color: var(--header-text);
             text-align: center;
             padding: 2rem 1rem;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
         }
         header h1 {
             font-family: 'Oswald', sans-serif;
@@ -46,25 +76,42 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: var(--header-text);
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
         .section {
-            background: white;
+            background: var(--bg-secondary);
             margin-bottom: 2rem;
             padding: 1.5rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .section:hover {
             transform: translateY(-2px);
         }
         .section h3 {
             font-family: 'Oswald', sans-serif;
-            color: #00BFFF;
+            color: var(--accent);
             font-size: 1.5rem;
             margin-top: 0;
             display: flex;
@@ -76,19 +123,20 @@
             padding: 0;
         }
         .stats-list li {
-            background: #f8f9fa;
+            background: var(--bg-primary);
             margin: 0.5rem 0;
             padding: 0.75rem;
-            border-left: 4px solid #00BFFF;
+            border-left: 4px solid var(--border-accent);
             border-radius: 4px;
             display: flex;
             justify-content: space-between;
+            transition: background-color 0.3s ease;
         }
         .stats-list li strong {
-            color: #00BFFF;
+            color: var(--accent);
         }
         .stats-list a {
-            color: #00BFFF;
+            color: var(--accent);
             text-decoration: none;
             font-weight: bold;
         }
@@ -105,9 +153,10 @@
             padding: 0.75rem;
             text-align: left;
             border-bottom: 1px solid #dee2e6;
+            color: var(--text-primary);
         }
         th {
-            background: #000000;
+            background: var(--table-header);
             color: white;
             cursor: pointer;
             font-family: 'Oswald', sans-serif;
@@ -118,7 +167,7 @@
             user-select: none;
         }
         th:hover {
-            background: #1a1a1a;
+            background: var(--table-header-hover);
         }
         th i.sort-icon {
             margin-left: 0.5rem;
@@ -138,7 +187,7 @@
             content: "\f0dc"; /* fa-sort */
         }
         tr:nth-child(even) {
-            background: #f8f9fa;
+            background: var(--bg-primary);
         }
         tr:hover {
             background: #e9ecef;
@@ -153,12 +202,13 @@
             margin: 0.5rem 0;
             padding-left: 2rem;
             position: relative;
+            color: var(--text-primary);
         }
         .ol-ranked li::before {
             content: counter(rank-counter) ".";
             position: absolute;
             left: 0;
-            color: #00BFFF;
+            color: var(--accent);
             font-weight: bold;
             font-family: 'Oswald', sans-serif;
         }
@@ -168,9 +218,10 @@
             background: #343a40;
             color: white;
             font-size: 0.9rem;
+            transition: background-color 0.3s ease;
         }
         footer a {
-            color: #00BFFF;
+            color: var(--accent);
             text-decoration: none;
         }
         footer a:hover {
@@ -183,4 +234,64 @@
         @media (max-width: 768px) {
             header h1 { font-size: 2rem; }
             table { font-size: 0.8rem; }
-            th
+            th, td { padding: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+        <h1><i class="fas fa-football-ball"></i> Class of 2026 Kickers Dashboard</h1>
+        <h2>Quint Johnson (Newnan High, GA) – #1 Nationally</h2>
+        <img src="profile.jpg" alt="Quint Johnson Profile Photo" onerror="this.style.display='none';">
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h3><i class="fas fa-chart-scatter"></i> FG% vs TB% – Interactive Scatter Plot</h3>
+            <p><em>Hover for stats • Click legend to filter • Double-click chart to reset</em></p>
+            <canvas id="scatterChart"></canvas>
+        </section>
+
+        <section class="section">
+            <h3><i class="fas fa-trophy"></i> Quint Johnson – #1 Kicker in America (2026)</h3>
+            <p>Newnan High School (GA)</p>
+            <ul class="stats-list">
+                <li><strong>FG%:</strong> <span>90.0% (9/10) Elite</span></li>
+                <li><strong>PAT%:</strong> <span>97.5% (39/40)</span></li>
+                <li><strong>TB%:</strong> <span>94.2% (49/52)</span></li>
+                <li><strong>KO Avg:</strong> <span>69.54 yds</span></li>
+                <li><strong>Long FG:</strong> <span>45 yds</span></li>
+                <li><strong>Personal Best FG:</strong> <span>65 yds</span></li>
+                <li><strong>Hudl:</strong> <span><a href="https://www.hudl.com/profile/17622106" target="_blank">Profile</a></span></li>
+                <li><strong>MaxPreps:</strong> <span><a href="https://www.maxpreps.com/ga/newnan/newnan-cougars/athletes/quint-johnson/?careerid=p8vijeo6m3322" target="_blank">Stats</a></span></li>
+                <li><strong>Points:</strong> <span>66</span></li>
+                <li><strong>Composite:</strong> <span>95.35% → #1 in Nation</span></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h3><i class="fas fa-table"></i> Top 20 Kickers Nationally – Full Stats (Sortable)</h3>
+            <table id="kickers-table">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)"><i class="fas fa-sort sort-icon"></i>Rank</th>
+                        <th onclick="sortTable(1)"><i class="fas fa-sort sort-icon"></i>Name</th>
+                        <th onclick="sortTable(2)"><i class="fas fa-sort sort-icon"></i>School</th>
+                        <th onclick="sortTable(3)"><i class="fas fa-sort sort-icon"></i>State</th>
+                        <th onclick="sortTable(4)"><i class="fas fa-sort sort-icon"></i>FG%</th>
+                        <th onclick="sortTable(5)"><i class="fas fa-sort sort-icon"></i>PAT%</th>
+                        <th onclick="sortTable(6)"><i class="fas fa-sort sort-icon"></i>TB%</th>
+                        <th onclick="sortTable(7)"><i class="fas fa-sort sort-icon"></i>Composite</th>
+                        <th onclick="sortTable(8)"><i class="fas fa-sort sort-icon"></i>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Quint Johnson</td><td>Newnan High</td><td>GA</td><td>90.0</td><td>97.5</td><td>94.2</td><td>95.35</td><td>uncommitted</td></tr>
+                    <tr><td>2</td><td>Harran Zureikat</td><td>Fox Chapel</td><td>PA</td><td>80.0</td><td>97.8</td><td>94.5</td><td>90.70</td><td>Georgia commit</td></tr>
+                    <tr><td>3</td><td>Stephen Gonzales</td><td>Cardinal Gibbons</td><td>NC</td><td>81.8</td><td>94.6</td><td>92.0</td><td>89.60</td><td>Stetson offer</td></tr>
+                    <tr><td>4</td><td>Leo Attard</td><td>North Gwinnett</td><td>GA</td><td>83.3</td><td>96.6</td><td>88.1</td><td>89.30</td><td>Army offer</td></tr>
+                    <tr><td>5</td><td>David Green</td><td>Rolesville</td><td>NC</td><td>77.8</td><td>95.5</td><td>92.6</td><td>88.60</td><td>UNC commit</td></tr>
+                    <tr><td>6</td><td>G
